@@ -1,0 +1,1331 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAFE MONEY | 금융 사기 예방 플랫폼</title>
+<style>
+:root{
+  --navy:#15345c;
+  --blue:#2878e5;
+  --sky:#eaf4ff;
+  --bg:#f5f9ff;
+  --white:#fff;
+  --ink:#243a58;
+  --muted:#7890aa;
+  --line:#dce8f7;
+  --green:#15966d;
+  --yellow:#edaa35;
+  --red:#e04f60;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  font-size:16px;line-height:1.65;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.48;cursor:not-allowed}
+button:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible{
+  outline:3px solid #94c2ff;outline-offset:2px;
+}
+.hidden{display:none!important}
+.screen{display:none}
+.screen.active{display:block;animation:fade .3s ease}
+.page{display:none}
+.page.active{display:block;animation:fade .25s ease}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.container{width:min(1080px,94%);margin:auto}
+.card{
+  background:#fff;border:1px solid var(--line);
+  border-radius:22px;padding:24px;margin-bottom:19px;
+  box-shadow:0 8px 28px #24549d0d;
+}
+h1,h2,h3,p{overflow-wrap:anywhere}
+h2{font-size:22px;margin:0 0 15px}
+h3{font-size:18px;margin:12px 0}
+.muted{font-size:13px;color:var(--muted);line-height:1.8}
+.btn{
+  border:0;border-radius:13px;padding:13px 18px;
+  color:white;background:var(--blue);font-weight:800;
+  transition:transform .15s,background .15s;
+}
+.btn:hover:not(:disabled){background:#1b63c2}
+.btn:active:not(:disabled){transform:scale(.97)}
+.btn-light{background:var(--sky);color:var(--navy)}
+.btn-light:hover:not(:disabled){background:#dcecff}
+.btn-outline{
+  background:white;color:var(--blue);
+  border:2px solid #b7d5fc;
+}
+.btn-red{background:#ffe8eb;color:#ae3747}
+.btn-small{padding:9px 12px;font-size:12px}
+.full{width:100%}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+label{
+  display:block;font-weight:800;font-size:14px;
+  margin:16px 0 8px;
+}
+textarea,input,select{
+  width:100%;min-width:0;padding:14px;
+  border:2px solid var(--line);border-radius:13px;
+  color:var(--ink);background:#fcfdff;
+}
+textarea{resize:vertical;min-height:155px}
+textarea:focus,input:focus,select:focus{
+  outline:none;border-color:var(--blue);
+}
+.tag{
+  display:inline-block;background:var(--sky);color:var(--navy);
+  border-radius:22px;padding:6px 11px;
+  font-size:12px;font-weight:800;
+}
+.danger{background:#ffecef;color:#b93247}
+.caution{background:#fff2db;color:#996317}
+.safe{background:#e8f8ef;color:#168255}
+.info{
+  background:#ecf5ff;padding:17px;border-radius:15px;
+  font-size:14px;line-height:1.85;
+}
+.warning-box{background:#fff4e6;color:#956322}
+.success-box{background:#e9f9f0;color:#187e58}
+.empty{
+  padding:30px;text-align:center;border-radius:15px;
+  background:#f3f8ff;color:var(--muted);
+  font-size:14px;line-height:1.8;
+}
+
+/* 홈 */
+#home{
+  min-height:100vh;
+  background:radial-gradient(circle at 50% 28%,#d9ecff,#f6faff 72%);
+}
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:35px 20px;
+}
+.hero-logo{
+  width:145px;height:145px;min-height:145px;
+  display:flex;align-items:center;justify-content:center;
+  background:white;border-radius:40px;
+  box-shadow:0 16px 40px #4077be24;
+  font-size:76px;line-height:1;flex-shrink:0;
+}
+.hero h1{
+  font-size:clamp(39px,8vw,64px);color:var(--navy);
+  margin:24px 0 10px;line-height:1.25;
+}
+.hero p{
+  color:#6c88a9;font-size:18px;line-height:1.9;
+  margin:10px 0;
+}
+.hero .btn{font-size:19px;padding:18px 40px;margin-top:22px}
+.hero-tags{
+  display:flex;gap:10px;flex-wrap:wrap;
+  justify-content:center;margin-top:30px;
+}
+.hero-tags span{
+  background:white;border:1px solid var(--line);
+  border-radius:24px;padding:10px 15px;font-size:13px;
+}
+
+/* 메뉴 */
+header{
+  background:white;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:10;
+}
+.header-inner{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:10px;padding:13px 0;
+}
+.logo{font-size:21px;font-weight:900;color:var(--navy)}
+main{padding:24px 0 60px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+nav button{flex:1;min-width:110px}
+nav .selected{background:var(--blue);color:white}
+.stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;margin-bottom:20px;
+}
+.stat{
+  background:white;padding:20px;border-radius:17px;
+  border:1px solid var(--line);
+}
+.stat span{font-size:12px;color:var(--muted)}
+.stat strong{
+  display:block;color:var(--navy);
+  font-size:clamp(20px,3vw,29px);margin-top:6px;
+}
+
+/* 입력 및 사례 */
+.example-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.example{
+  text-align:left;border:2px solid var(--line);
+  padding:17px;background:white;border-radius:16px;
+  color:var(--ink);
+}
+.example:hover{border-color:#88bafa;background:#f8fbff}
+.example strong{display:block;margin:7px 0}
+.example small{display:block;color:var(--muted);line-height:1.6}
+.upload{
+  border:2px dashed #b7d5fa;
+  border-radius:15px;padding:16px;background:#f9fcff;
+}
+.preview{
+  display:block;max-width:100%;max-height:260px;
+  margin:12px auto;border-radius:12px;
+}
+
+/* 위험 결과 */
+.risk-header{
+  border-radius:19px;padding:24px;text-align:center;
+  background:#e9f8ee;color:#166747;
+}
+.risk-header.caution{background:#fff2db;color:#94611c}
+.risk-header.danger{background:#ffe9ec;color:#b22d43}
+.risk-emoji{font-size:64px;line-height:1.4}
+.risk-level{font-size:32px;font-weight:900}
+.meter{
+  height:16px;background:#e6edf7;
+  border-radius:20px;overflow:hidden;margin:14px 0;
+}
+.meter-fill{
+  height:100%;width:0;border-radius:20px;
+  background:var(--blue);transition:width .5s;
+}
+.reason{
+  padding:13px;background:#f5f9ff;
+  border-radius:12px;margin:9px 0;
+  font-size:14px;
+}
+.action{
+  display:flex;gap:11px;padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.action:last-child{border-bottom:0}
+.action-number{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--sky);display:grid;place-items:center;
+  color:var(--navy);font-weight:900;flex-shrink:0;
+}
+
+/* 시뮬레이션 */
+.case-scene{
+  background:linear-gradient(135deg,#eaf3ff,#f8fbff);
+  border-radius:19px;padding:24px;text-align:center;
+}
+.case-emoji{font-size:68px}
+.case-text{
+  background:white;border-radius:14px;
+  padding:18px;margin-top:16px;
+  white-space:pre-wrap;text-align:left;
+  font-size:15px;line-height:1.9;
+}
+.choice{
+  display:block;width:100%;text-align:left;
+  background:white;color:var(--ink);
+  border:2px solid var(--line);
+  border-radius:14px;padding:17px;
+  margin:11px 0;font-weight:700;
+}
+.choice:hover:not(:disabled){border-color:var(--blue)}
+.choice.selected{border-color:var(--blue);background:#eaf4ff}
+.choice.correct{border-color:#4ab48a;background:#ebf9f1}
+.choice.wrong{border-color:#e76e7e;background:#fff0f2}
+.scorebar{height:13px;border-radius:20px;background:#e1eaf5;overflow:hidden}
+.scorefill{height:100%;background:#4ba9e8;transition:width .3s}
+
+/* 도감 */
+.atlas-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.atlas-card{
+  background:white;border:2px solid var(--line);
+  border-radius:18px;padding:18px;text-align:left;
+  color:var(--ink);
+}
+.atlas-card:not(:disabled):hover{border-color:#8ab6f1}
+.atlas-card.locked{filter:grayscale(1);opacity:.7}
+.atlas-icon{font-size:45px}
+.atlas-card strong{display:block;margin:8px 0}
+.atlas-card small{font-size:12px;color:var(--muted)}
+.atlas-detail{
+  margin-top:18px;border-radius:16px;
+  background:#eef5ff;padding:20px;
+  line-height:1.8;
+}
+.reward-box{
+  background:linear-gradient(120deg,#e7f2ff,#f7fbff);
+  border:1px solid #cbdef7;padding:22px;border-radius:18px;
+}
+
+/* 알림 */
+.toast{
+  position:fixed;z-index:100;left:50%;bottom:23px;
+  transform:translateX(-50%);border-radius:25px;
+  background:var(--navy);color:white;
+  padding:13px 20px;text-align:center;max-width:90%;
+  font-size:13px;
+}
+footer{text-align:center;color:#9cacc2;font-size:12px;padding:22px;line-height:1.8}
+@media(max-width:720px){
+  .grid{grid-template-columns:1fr;gap:0}
+  .atlas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card{padding:18px}
+  .hero-logo{width:115px;height:115px;min-height:115px;font-size:59px}
+  .hero p{font-size:16px}
+  nav button{min-width:80px;font-size:12px;padding:11px 8px}
+}
+@media(max-width:480px){
+  .example-grid{grid-template-columns:1fr}
+  .stats{gap:6px}
+  .stat{padding:12px 9px}
+  .stat span{font-size:10px}
+  .stat strong{font-size:18px}
+  .atlas-grid{gap:8px}
+  .atlas-card{padding:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- 홈 화면 -->
+<section class="screen active" id="home">
+  <div class="hero">
+    <div class="hero-logo">🛡️</div>
+    <h1>SAFE MONEY</h1>
+    <p>
+      의심스러운 금융 연락, 혼자 고민하지 마세요.<br>
+      위험 신호를 찾아보고<br>
+      안전한 대처 방법을 배워 보세요.
+    </p>
+    <button class="btn" id="startBtn">🛡️ 사기 예방 시작하기</button>
+    <div class="hero-tags">
+      <span>🔍 위험 분석</span>
+      <span>🎮 사기 대응 연습</span>
+      <span>📚 사기 도감</span>
+      <span>🏅 학습 배지</span>
+    </div>
+    <p class="muted">
+      규칙 기반 금융 사기 교육 서비스 · 실제 금융기관 조회 기능 없음
+    </p>
+  </div>
+</section>
+
+<!-- 서비스 -->
+<section class="screen" id="app">
+  <header>
+    <div class="container header-inner">
+      <div class="logo">🛡️ SAFE MONEY</div>
+      <button class="btn btn-light btn-small" id="homeBtn">홈</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav>
+      <button class="btn btn-light selected" data-page="dashboard">
+        🏠 홈
+      </button>
+      <button class="btn btn-light" data-page="analyze">
+        🔍 위험 분석
+      </button>
+      <button class="btn btn-light" data-page="simulation">
+        🎮 예방 연습
+      </button>
+      <button class="btn btn-light" data-page="atlas">
+        📚 사기 도감
+      </button>
+    </nav>
+
+    <!-- 대시보드 -->
+    <section class="page active" id="dashboard">
+      <div class="stats">
+        <div class="stat">
+          <span>완료한 연습</span>
+          <strong id="statSolved">0회</strong>
+        </div>
+        <div class="stat">
+          <span>수집한 사기 유형</span>
+          <strong id="statDiscovered">0 / 5</strong>
+        </div>
+        <div class="stat">
+          <span>정답률</span>
+          <strong id="statAccuracy">0%</strong>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>🔍 의심스러운 상황이 있나요?</h2>
+          <p class="muted">
+            문자 메시지, 전화 내용, 중고 거래 상황 등을
+            적으면 위험 신호를 확인해 드려요.
+          </p>
+          <div style="font-size:58px;text-align:center;margin:18px 0">
+            📱🔎
+          </div>
+          <button class="btn full" data-goto="analyze">
+            지금 위험 분석하기 →
+          </button>
+        </div>
+        <div class="card">
+          <h2>🎮 사기 대처 능력 키우기</h2>
+          <p class="muted">
+            실제로 일어날 법한 상황에서
+            어떻게 대응해야 하는지 직접 선택해 보세요.
+          </p>
+          <div style="font-size:58px;text-align:center;margin:18px 0">
+            🧠🛡️
+          </div>
+          <button class="btn full" data-goto="simulation">
+            사기 예방 연습하기 →
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🚨 꼭 기억하세요</h2>
+        <div class="info warning-box">
+          은행이나 공공기관을 사칭하며 문자 속 링크 접속,
+          인증번호 전달, 금전 송금 또는 원격제어 앱 설치를
+          요구한다면 매우 주의해야 해요.<br><br>
+          <strong>문자의 링크 대신, 직접 확인한 공식 앱이나
+          공식 대표번호로 연락하세요.</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- 위험 분석 -->
+    <section class="page" id="analyze">
+      <div class="card">
+        <h2>🔍 금융 사기 위험 분석</h2>
+        <p class="muted">
+          의심스러운 문자나 전화·거래 상황을 입력하세요.
+          이름, 계좌번호, 비밀번호, 인증번호는 입력하지 마세요.
+        </p>
+
+        <label for="situationInput">의심스러운 내용</label>
+        <textarea id="situationInput" maxlength="3000"
+          placeholder="예: 고객님의 계좌가 정지될 예정입니다. 아래 링크에 접속하여 본인 인증을 진행해 주세요."></textarea>
+        <div class="between">
+          <span class="muted">내용을 최대한 구체적으로 적어 주세요.</span>
+          <span class="muted" id="charCount">0 / 3000</span>
+        </div>
+
+        <label for="screenshotInput">📷 캡처본 업로드 (선택)</label>
+        <div class="upload">
+          <input id="screenshotInput" type="file"
+                 accept="image/png,image/jpeg,image/webp">
+          <img id="imagePreview" class="preview hidden"
+               alt="업로드한 캡처 이미지 미리보기">
+          <p class="muted" id="imageNote">
+            이미지 업로드는 미리보기만 지원해요.
+            이미지에 있는 의심 문구를 위 입력칸에 적어 주세요.
+          </p>
+        </div>
+
+        <button class="btn full" id="analyzeBtn"
+                style="margin-top:18px">
+          🛡️ 위험 요소 분석하기
+        </button>
+        <p class="muted">
+          입력한 문구를 기기 내 규칙과 비교해요.
+          이미지 내용은 자동으로 읽거나 분석하지 않아요.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>📂 대표적인 금융 사기 사례</h2>
+        <div class="example-grid" id="exampleGrid"></div>
+      </div>
+    </section>
+
+    <!-- 분석 결과 -->
+    <section class="page" id="result">
+      <div class="card">
+        <div class="risk-header" id="riskHeader">
+          <div class="risk-emoji" id="riskEmoji">🔍</div>
+          <div>금융 사기 위험 분석 결과</div>
+          <div class="risk-level" id="riskLevel">분석 결과</div>
+          <p id="riskSummary"></p>
+        </div>
+
+        <h2 style="margin-top:24px">📌 의심되는 유형</h2>
+        <div id="riskTypes" class="row"></div>
+
+        <h2 style="margin-top:24px">🔎 위험하다고 판단한 이유</h2>
+        <div id="riskReasons"></div>
+
+        <h2 style="margin-top:24px">🛡️ 안전한 대처 방법</h2>
+        <div id="riskActions"></div>
+
+        <div class="info warning-box" style="margin-top:18px">
+          ⚠️ 위험 수준이 낮아도 안전하다는 보장은 없어요.
+          공식 기관의 연락처와 거래 상대방을 별도로 확인하세요.
+        </div>
+        <div class="row" style="margin-top:19px">
+          <button class="btn" id="analyzeAgainBtn">다시 분석하기</button>
+          <button class="btn btn-light" data-goto="simulation">
+            예방 연습하기
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🚑 이미 피해를 입었다면</h2>
+        <div class="info warning-box" id="victimActions"></div>
+      </div>
+    </section>
+
+    <!-- 시뮬레이션 -->
+    <section class="page" id="simulation">
+      <div class="card">
+        <div class="between">
+          <h2>🎮 금융 사기 예방 시뮬레이션</h2>
+          <span class="tag" id="casePosition">1 / 5</span>
+        </div>
+        <p class="muted">
+          상황을 읽고 가장 안전한 대응을 선택하세요.
+          정답을 선택하지 못해도 해설을 통해 배울 수 있어요.
+        </p>
+        <div class="scorebar">
+          <div class="scorefill" id="caseProgress" style="width:0%"></div>
+        </div>
+
+        <div class="case-scene" style="margin-top:22px">
+          <div class="case-emoji" id="caseEmoji">📱</div>
+          <h2 id="caseTitle"></h2>
+          <div class="case-text" id="caseText"></div>
+        </div>
+
+        <div id="choiceList" style="margin-top:20px"></div>
+
+        <label for="ownAnswer">내가 생각한 대처 방법 (선택)</label>
+        <textarea id="ownAnswer" rows="2"
+          style="min-height:90px"
+          placeholder="예: 문자 링크는 누르지 않고 공식 고객센터에 문의한다."></textarea>
+        <p class="muted">
+          직접 작성한 답변은 복습용이며, 정답 점수는 선택지로 판정해요.
+        </p>
+
+        <button class="btn full" id="submitChoiceBtn">
+          내 판단 확인하기
+        </button>
+
+        <div id="caseFeedback" class="info hidden"
+             style="margin-top:20px"></div>
+        <button class="btn btn-light full hidden" id="nextCaseBtn"
+                style="margin-top:12px">다음 사례 →</button>
+      </div>
+    </section>
+
+    <!-- 도감 -->
+    <section class="page" id="atlas">
+      <div class="card">
+        <h2>📚 나의 금융 사기 도감</h2>
+        <p class="muted">
+          시뮬레이션을 완료해 새로운 금융 사기 유형을
+          발견하고 도감을 채워 보세요.
+        </p>
+        <div class="between">
+          <strong id="atlasProgressText">0 / 5종 발견</strong>
+          <span class="tag" id="atlasPercent">0%</span>
+        </div>
+        <div class="meter">
+          <div class="meter-fill" id="atlasFill"></div>
+        </div>
+
+        <div class="atlas-grid" id="atlasGrid"></div>
+
+        <div id="atlasDetail" class="atlas-detail hidden"></div>
+      </div>
+
+      <div class="card">
+        <h2>🏅 안전 금융 지킴이 보상</h2>
+        <div class="reward-box" id="rewardBox"></div>
+        <p class="muted">
+          보상은 교육용 가상 배지예요.
+          실제 상품권이나 기프티콘이 지급되지는 않아요.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    SAFE MONEY · 금융 사기 예방 학습 플랫폼<br>
+    규칙 기반 위험 분석은 교육용 참고 자료이며
+    범죄 여부를 법적으로 판정하지 않습니다.
+  </footer>
+</section>
+
+<div class="toast hidden" id="toast"
+     role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const STORAGE_KEY = "safe-money-learning-v1";
+
+const TYPES = {
+  smishing:{
+    name:"스미싱·기관 사칭",
+    emoji:"📱",
+    feature:"문자 속 링크로 가짜 금융기관 사이트에 접속하도록 유도합니다.",
+    trick:"계좌 정지, 본인 인증, 결제 오류 등을 핑계로 불안을 조성합니다.",
+    prevent:"문자 속 링크는 누르지 말고 공식 앱이나 직접 확인한 대표번호로 문의합니다."
+  },
+  voice:{
+    name:"보이스피싱",
+    emoji:"📞",
+    feature:"전화로 기관·가족을 사칭하며 송금이나 정보 제공을 요구합니다.",
+    trick:"검찰, 경찰, 은행 직원 또는 가족인 척 긴급한 상황을 만들어 냅니다.",
+    prevent:"통화를 끊고 공식 번호나 가족의 기존 연락처로 사실 여부를 확인합니다."
+  },
+  trade:{
+    name:"중고 거래 사기",
+    emoji:"📦",
+    feature:"온라인 거래에서 물품을 보내지 않거나 입금만 요구합니다.",
+    trick:"시세보다 지나치게 싼 가격, 외부 결제 유도, 선입금을 요구합니다.",
+    prevent:"안전한 거래 방법을 이용하고 거래 상대방과 상품 정보를 확인합니다."
+  },
+  investment:{
+    name:"투자·고수익 사기",
+    emoji:"📈",
+    feature:"원금 보장이나 비정상적인 고수익을 약속합니다.",
+    trick:"수익 인증 화면, 비밀 투자방, 한정된 투자 기회 등으로 유혹합니다.",
+    prevent:"원금 보장·고수익 약속을 의심하고 등록된 금융회사인지 확인합니다."
+  },
+  remote:{
+    name:"악성 앱·원격제어 사기",
+    emoji:"📲",
+    feature:"원격제어 앱이나 출처 불분명한 파일을 설치하게 만듭니다.",
+    trick:"보안 점검, 환급, 앱 업데이트를 핑계로 기기를 조작하려 합니다.",
+    prevent:"출처 불분명한 앱을 설치하지 않고 공식 앱스토어 및 공식 고객센터를 확인합니다."
+  }
+};
+
+const CASES = [
+  {
+    id:"smishing",emoji:"🏦",title:"은행 사칭 계좌 정지 문자",
+    text:"[OO은행 안내]\n고객님의 계좌가 곧 정지됩니다.\n아래 링크로 접속해 지금 본인 인증을 진행하세요.\nhttp://secure-bank-check.example",
+    choices:[
+      "문자 속 링크로 접속해 비밀번호와 인증번호를 입력한다.",
+      "문자를 통한 접속을 멈추고 공식 은행 앱이나 직접 확인한 대표번호로 문의한다.",
+      "상대방에게 계좌번호를 보내 계좌 정지 여부를 확인한다."
+    ],
+    correct:1,
+    reason:"계좌 정지라는 긴급한 표현과 출처가 불분명한 인증 링크는 스미싱의 대표적인 위험 신호입니다."
+  },
+  {
+    id:"voice",emoji:"📞",title:"수사기관 사칭 전화",
+    text:"'검찰입니다. 본인 명의 계좌가 범죄에 연루됐습니다. 안전계좌로 돈을 이체해야 합니다. 통화를 끊지 마세요.'",
+    choices:[
+      "지시한 안전계좌로 바로 송금한다.",
+      "상대방에게 내 인터넷뱅킹 비밀번호를 알려준다.",
+      "전화를 끊고 관련 기관의 공식 연락처로 확인한다."
+    ],
+    correct:2,
+    reason:"수사기관 사칭과 안전계좌 송금 요구는 전형적인 보이스피싱 신호입니다."
+  },
+  {
+    id:"trade",emoji:"📦",title:"지나치게 저렴한 중고 거래",
+    text:"인기 게임기를 시세의 절반 가격에 판매한다며 판매자가 '오늘 안에 선입금해야 한다'고 재촉합니다. 안전결제는 거절합니다.",
+    choices:[
+      "기회를 놓치기 전에 바로 선입금한다.",
+      "상품과 판매자 정보를 확인하고 안전한 거래가 어렵다면 거래를 중단한다.",
+      "판매자에게 내 신분증 전체 사진을 보낸다."
+    ],
+    correct:1,
+    reason:"지나친 할인, 긴급한 선입금 요구, 안전거래 거부는 중고 거래 사기의 위험 신호입니다."
+  },
+  {
+    id:"investment",emoji:"💸",title:"원금 보장 고수익 투자방",
+    text:"투자 단체 채팅방에서 '일주일에 수익 30%, 원금 보장'을 약속하며 오늘까지 입금하라고 안내합니다.",
+    choices:[
+      "원금 보장이라고 하니 목돈을 입금한다.",
+      "친구들에게도 빠르게 가입하라고 권한다.",
+      "고수익 보장을 의심하고 등록 여부와 투자 위험을 검증한다."
+    ],
+    correct:2,
+    reason:"짧은 기간의 확정 고수익과 원금 보장을 동시에 약속하는 것은 강한 사기 위험 신호입니다."
+  },
+  {
+    id:"remote",emoji:"📲",title:"보안 점검 앱 설치 요구",
+    text:"은행 상담원이라며 전화한 사람이 '계좌 보호를 위해 문자로 보낸 파일을 설치하고 원격제어 권한을 허용하라'고 합니다.",
+    choices:[
+      "문자로 받은 앱 파일을 설치하고 권한을 허용한다.",
+      "설치를 거부하고 공식 고객센터를 직접 확인한다.",
+      "앱을 설치한 뒤 비밀번호까지 알려준다."
+    ],
+    correct:1,
+    reason:"출처가 불분명한 앱과 원격제어 권한 요구는 금융정보 탈취에 이용될 수 있습니다."
+  }
+];
+
+const EXAMPLES = [
+  {
+    title:"🏦 은행 사칭 계좌 정지 문자",
+    desc:"계좌 정지를 언급하며 본인 인증 링크를 요구",
+    text:"고객님의 계좌가 정지될 예정입니다. 아래 링크에 접속하여 본인 인증을 진행해 주세요."
+  },
+  {
+    title:"📞 검찰 사칭 송금 요구",
+    desc:"사건에 연루됐다며 안전계좌 송금 유도",
+    text:"검찰입니다. 고객님의 계좌가 범죄에 연루되었습니다. 즉시 안전계좌로 돈을 송금해야 합니다."
+  },
+  {
+    title:"📦 중고 거래 선입금 요청",
+    desc:"저렴한 가격으로 유인해 빠른 선입금 요구",
+    text:"중고 물건을 시세보다 싸게 드립니다. 오늘만 이 가격이고 안전결제는 안 됩니다. 지금 선입금해 주세요."
+  },
+  {
+    title:"📈 원금 보장 투자 권유",
+    desc:"고수익을 확정적으로 약속",
+    text:"원금 보장! 일주일 안에 30% 수익을 확정 지급합니다. 오늘 즉시 입금하세요."
+  },
+  {
+    title:"📲 원격제어 앱 설치 요구",
+    desc:"보안 점검을 핑계로 앱 설치 요청",
+    text:"은행 보안팀입니다. 계좌 보호를 위해 지금 원격제어 앱을 설치하고 인증번호를 알려주세요."
+  }
+];
+
+function freshState(){
+  return {
+    discovered:[],
+    completed:0,
+    correct:0,
+    rewards:[],
+    history:[]
+  };
+}
+
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(!d || !Array.isArray(d.discovered) ||
+       !Array.isArray(d.rewards) ||
+       !Array.isArray(d.history))return freshState();
+    return {...freshState(),...d};
+  }catch{return freshState()}
+}
+
+let state=load();
+let caseIndex=0;
+let selectedChoice=null;
+let answered=false;
+let toastTimer=null;
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    return true;
+  }catch{
+    toast("학습 기록 저장에 실패했어요.");
+    return false;
+  }
+}
+
+function toast(message){
+  $("toast").textContent=message;
+  $("toast").classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(
+    ()=>$("toast").classList.add("hidden"),2700
+  );
+}
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(el=>{
+    el.classList.toggle("active",el.id===id);
+  });
+  window.scrollTo(0,0);
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(el=>{
+    el.classList.toggle("active",el.id===id);
+  });
+  document.querySelectorAll("[data-page]").forEach(btn=>{
+    btn.classList.toggle("selected",btn.dataset.page===id);
+  });
+  renderDashboard();
+  if(id==="atlas")renderAtlas();
+  if(id==="simulation")renderCase();
+  window.scrollTo(0,0);
+}
+
+$("startBtn").onclick=()=>{
+  showScreen("app");
+  showPage("dashboard");
+};
+
+$("homeBtn").onclick=()=>showScreen("home");
+
+document.querySelectorAll("[data-page]").forEach(btn=>{
+  btn.onclick=()=>showPage(btn.dataset.page);
+});
+
+document.querySelectorAll("[data-goto]").forEach(btn=>{
+  btn.onclick=()=>showPage(btn.dataset.goto);
+});
+
+/* 1. 사례 버튼 */
+
+function renderExamples(){
+  const box=$("exampleGrid");
+  box.replaceChildren();
+
+  EXAMPLES.forEach(example=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="example";
+
+    const title=document.createElement("strong");
+    title.textContent=example.title;
+
+    const desc=document.createElement("small");
+    desc.textContent=example.desc;
+
+    btn.append(title,desc);
+    btn.onclick=()=>{
+      $("situationInput").value=example.text;
+      updateCharacterCount();
+      analyzeSituation();
+    };
+    box.appendChild(btn);
+  });
+}
+
+function updateCharacterCount(){
+  $("charCount").textContent=
+    $("situationInput").value.length+" / 3000";
+}
+
+$("situationInput").addEventListener(
+  "input",updateCharacterCount
+);
+
+/* 2. 이미지 업로드: 미리보기만 지원 */
+
+let previewURL=null;
+
+$("screenshotInput").addEventListener("change",e=>{
+  const file=e.target.files[0];
+
+  if(previewURL){
+    URL.revokeObjectURL(previewURL);
+    previewURL=null;
+  }
+
+  $("imagePreview").classList.add("hidden");
+
+  if(!file)return;
+
+  if(!["image/png","image/jpeg","image/webp"]
+      .includes(file.type)){
+    e.target.value="";
+    toast("PNG, JPG, WEBP 이미지만 업로드할 수 있어요.");
+    return;
+  }
+
+  if(file.size>5*1024*1024){
+    e.target.value="";
+    toast("이미지는 최대 5MB까지 업로드할 수 있어요.");
+    return;
+  }
+
+  previewURL=URL.createObjectURL(file);
+  $("imagePreview").src=previewURL;
+  $("imagePreview").classList.remove("hidden");
+  $("imageNote").textContent=
+    "✅ 캡처 미리보기 완료! 분석할 문자 내용을 위 입력칸에 적어 주세요.";
+});
+
+/* 3. 규칙 기반 위험 분석 */
+
+const RULES = [
+  {
+    name:"개인정보 또는 인증정보 요구",
+    test:/비밀번호|인증번호|otp|주민등록번호|신분증|보안카드|카드번호|계좌번호|개인정보/i,
+    weight:3,
+    reason:"인증정보나 민감한 금융정보를 요구하는 표현이 있습니다."
+  },
+  {
+    name:"송금·입금 유도",
+    test:/송금|입금|이체|선입금|안전계좌|보증금|수수료.*납부/i,
+    weight:3,
+    reason:"돈을 보내거나 입금하도록 유도하는 표현이 있습니다."
+  },
+  {
+    name:"링크 접속 유도",
+    test:/https?:\/\/|www\.|링크|url|접속|클릭|사이트|주소로 이동/i,
+    weight:2,
+    reason:"웹사이트 또는 링크로 이동하도록 요구하고 있습니다. 주소의 진위를 별도로 확인해야 합니다."
+  },
+  {
+    name:"긴급한 행동 요구",
+    test:/즉시|지금|당장|오늘까지|긴급|서둘러|빨리|예정입니다|기한|정지|차단|압류/i,
+    weight:3,
+    reason:"불안감이나 시간 압박을 이용해 급하게 행동하도록 유도합니다."
+  },
+  {
+    name:"본인 인증 유도",
+    test:/본인.?인증|본인.?확인|인증을 진행|인증하세요|계정 확인/i,
+    weight:3,
+    reason:"본인 인증을 요구하고 있어 공식 경로인지 확인해야 합니다."
+  },
+  {
+    name:"기관 사칭 의심",
+    test:/은행|금융기관|검찰|경찰|금감원|금융감독원|국세청|수사기관|공공기관/i,
+    weight:2,
+    reason:"금융기관 또는 공공기관을 언급합니다. 발신자의 신원을 확인할 필요가 있습니다."
+  },
+  {
+    name:"과도한 수익 약속",
+    test:/원금.?보장|수익.?보장|확정.?수익|고수익|무조건.?수익|수익률\s*\d+%/i,
+    weight:4,
+    reason:"높은 수익 또는 원금 보장을 약속하는 투자 권유가 포함돼 있습니다."
+  },
+  {
+    name:"앱 설치·원격제어 요구",
+    test:/원격제어|원격.?앱|앱.?설치|파일.?설치|apk|접근성.?권한|화면.?공유/i,
+    weight:5,
+    reason:"앱 설치 또는 원격제어 권한을 요구합니다. 악성 앱 위험을 주의해야 합니다."
+  },
+  {
+    name:"거래 위험 신호",
+    test:/중고|택배|안전결제|거래|시세|판매자|배송|구매자/i,
+    weight:1,
+    reason:"온라인 거래 관련 내용으로, 판매자·결제 방식 확인이 필요합니다."
+  }
+];
+
+function classify(text,matched){
+  const has=regex=>regex.test(text);
+  const categories=[];
+
+  if(has(/계좌.?정지|계좌가 정지|본인.?인증|문자.*링크|링크.*인증/i) ||
+     (matched.some(x=>x.name==="기관 사칭 의심") &&
+      matched.some(x=>x.name==="링크 접속 유도"))){
+    categories.push("smishing");
+  }
+
+  if(has(/검찰|경찰|수사기관|안전계좌|통화를 끊지|보이스피싱/i)){
+    categories.push("voice");
+  }
+
+  if(has(/중고|선입금|안전결제|판매자|시세보다/i)){
+    categories.push("trade");
+  }
+
+  if(has(/원금.?보장|고수익|확정.?수익|투자방|수익률/i)){
+    categories.push("investment");
+  }
+
+  if(has(/원격제어|원격.?앱|apk|앱.?설치|접근성.?권한/i)){
+    categories.push("remote");
+  }
+
+  return [...new Set(categories)];
+}
+
+function evaluate(text){
+  const matched=RULES.filter(rule=>rule.test.test(text));
+  const reasons=matched.map(rule=>rule.reason);
+  const types=classify(text,matched);
+
+  let score=matched.reduce((sum,r)=>sum+r.weight,0);
+
+  // 링크 + 긴급한 본인 인증 조합은 높은 위험
+  const urgent=matched.some(r=>r.name==="긴급한 행동 요구");
+  const identity=matched.some(r=>r.name==="본인 인증 유도");
+  const link=matched.some(r=>r.name==="링크 접속 유도");
+
+  if(urgent&&identity){
+    score+=4;
+    reasons.push("긴급한 상황을 강조하면서 본인 인증을 요구하는 조합입니다.");
+  }
+
+  if(link&&identity){
+    score+=3;
+    reasons.push("링크 접속과 인증 요구가 결합되어 있어 계정정보 탈취 위험이 의심됩니다.");
+  }
+
+  if(types.includes("voice") &&
+     matched.some(r=>r.name==="송금·입금 유도")){
+    score+=4;
+  }
+
+  const level=score>=8?"높음":score>=3?"주의":"낮음";
+
+  return {
+    score:Math.min(100,Math.round(score/22*100)),
+    level,types,reasons
+  };
+}
+
+function getActions(result){
+  const actions=[
+    "문자·전화의 지시를 바로 따르지 말고 상대방을 확인하세요.",
+    "금융기관의 공식 앱이나 직접 확인한 대표번호로 연락하세요.",
+    "비밀번호·인증번호·신분증 사진 등 민감정보를 전달하지 마세요."
+  ];
+
+  if(result.types.includes("smishing")){
+    actions.unshift("문자에 포함된 링크를 누르지 마세요.");
+  }
+  if(result.types.includes("voice")){
+    actions.unshift("의심스러운 통화를 끊고 공식 기관에 직접 확인하세요.");
+  }
+  if(result.types.includes("trade")){
+    actions.push("거래 상대방과 물품을 검증하고 안전한 결제 방식을 이용하세요.");
+  }
+  if(result.types.includes("investment")){
+    actions.push("원금 보장·고수익 약속을 믿고 송금하지 마세요.");
+  }
+  if(result.types.includes("remote")){
+    actions.unshift("출처 불분명한 앱을 설치하거나 원격제어 권한을 허용하지 마세요.");
+  }
+
+  return [...new Set(actions)];
+}
+
+function appendReason(parent,text){
+  const div=document.createElement("div");
+  div.className="reason";
+  div.textContent="🔎 "+text;
+  parent.appendChild(div);
+}
+
+function appendAction(parent,text,index){
+  const div=document.createElement("div");
+  div.className="action";
+  const num=document.createElement("div");
+  num.className="action-number";
+  num.textContent=index+1;
+  const content=document.createElement("div");
+  content.textContent=text;
+  div.append(num,content);
+  parent.appendChild(div);
+}
+
+function renderRisk(result){
+  const header=$("riskHeader");
+  header.className="risk-header";
+
+  if(result.level==="높음"){
+    header.classList.add("danger");
+    $("riskEmoji").textContent="🚨";
+  }else if(result.level==="주의"){
+    header.classList.add("caution");
+    $("riskEmoji").textContent="⚠️";
+  }else{
+    $("riskEmoji").textContent="🛡️";
+  }
+
+  $("riskLevel").textContent="위험 수준: "+result.level;
+  $("riskSummary").textContent=
+    result.level==="높음"
+      ?"금융 사기가 의심되는 위험 신호가 여러 개 발견됐어요."
+      :result.level==="주의"
+        ?"주의가 필요한 표현이 발견됐어요. 사실 여부를 확인하세요."
+        :"알려진 주요 위험 표현이 적게 발견됐어요. 하지만 안전하다는 뜻은 아니에요.";
+
+  const types=$("riskTypes");
+  types.replaceChildren();
+
+  if(!result.types.length){
+    const tag=document.createElement("span");
+    tag.className="tag";
+    tag.textContent="유형 특정 어려움";
+    types.appendChild(tag);
+  }else{
+    result.types.forEach(id=>{
+      const tag=document.createElement("span");
+      tag.className="tag danger";
+      tag.textContent=TYPES[id].emoji+" "+TYPES[id].name;
+      types.appendChild(tag);
+    });
+  }
+
+  const reasons=$("riskReasons");
+  reasons.replaceChildren();
+
+  if(!result.reasons.length){
+    appendReason(reasons,
+      "등록된 주요 사기 표현이 발견되지 않았습니다. 해당 연락의 실제 안전성은 확인되지 않았습니다.");
+  }else{
+    result.reasons.forEach(reason=>appendReason(reasons,reason));
+  }
+
+  const actions=$("riskActions");
+  actions.replaceChildren();
+  getActions(result).forEach((action,i)=>{
+    appendAction(actions,action,i);
+  });
+
+  $("victimActions").textContent=
+    "① 이미 송금했다면 즉시 거래 은행에 연락해 피해 신고와 지급정지 가능 여부를 문의하세요.\n"+
+    "② 경찰(112)에 신고하고 관련 증거를 보관하세요.\n"+
+    "③ 비밀번호나 인증번호를 알려줬다면 공식 경로에서 비밀번호를 변경하고 금융기관에 계정 보호를 요청하세요.\n"+
+    "④ 악성 앱을 설치했다면 의심 기기에서 금융 앱을 이용하지 말고, 안전한 다른 기기를 통해 은행과 경찰에 연락하세요.\n"+
+    "⑤ 금융감독원(1332) 등 공식 상담 창구에도 추가 지원을 문의할 수 있어요.";
+  $("victimActions").style.whiteSpace="pre-line";
+}
+
+function analyzeSituation(){
+  const text=$("situationInput").value.trim();
+
+  if(text.length<5){
+    toast("상황을 5글자 이상 입력해 주세요.");
+    return;
+  }
+
+  const result=evaluate(text);
+  renderRisk(result);
+
+  state.history.unshift({
+    time:Date.now(),
+    level:result.level,
+    types:result.types
+  });
+  state.history=state.history.slice(0,20);
+  save();
+
+  showPage("result");
+}
+
+$("analyzeBtn").onclick=analyzeSituation;
+$("analyzeAgainBtn").onclick=()=>showPage("analyze");
+
+/* 4. 시뮬레이션 */
+
+function renderCase(){
+  const c=CASES[caseIndex];
+
+  $("casePosition").textContent=(caseIndex+1)+" / "+CASES.length;
+  $("caseProgress").style.width=
+    (caseIndex/CASES.length*100)+"%";
+  $("caseEmoji").textContent=c.emoji;
+  $("caseTitle").textContent=c.title;
+  $("caseText").textContent=c.text;
+
+  const box=$("choiceList");
+  box.replaceChildren();
+
+  c.choices.forEach((text,index)=>{
+    const btn=document.createElement("button");
+    btn.className="choice";
+    btn.textContent=(index+1)+". "+text;
+    btn.disabled=answered;
+
+    if(selectedChoice===index){
+      btn.classList.add("selected");
+    }
+    if(answered&&index===c.correct){
+      btn.classList.add("correct");
+    }
+    if(answered&&selectedChoice===index&&
+       index!==c.correct){
+      btn.classList.add("wrong");
+    }
+
+    btn.onclick=()=>{
+      if(answered)return;
+      selectedChoice=index;
+      renderCase();
+    };
+    box.appendChild(btn);
+  });
+
+  $("submitChoiceBtn").disabled=answered;
+  $("submitChoiceBtn").classList.toggle("hidden",answered);
+  $("caseFeedback").classList.toggle("hidden",!answered);
+  $("nextCaseBtn").classList.toggle("hidden",!answered);
+  $("nextCaseBtn").textContent=
+    caseIndex===CASES.length-1
+      ?"🏅 도감과 보상 확인하기"
+      :"다음 사례 →";
+}
+
+$("submitChoiceBtn").onclick=()=>{
+  if(selectedChoice===null){
+    toast("먼저 가장 안전한 대응 방법을 선택해 주세요.");
+    return;
+  }
+
+  if(answered)return;
+
+  const c=CASES[caseIndex];
+  const isCorrect=selectedChoice===c.correct;
+
+  state.completed++;
+  if(isCorrect)state.correct++;
+
+  if(!state.discovered.includes(c.id)){
+    state.discovered.push(c.id);
+  }
+
+  checkRewards();
+  save();
+
+  answered=true;
+  const fb=$("caseFeedback");
+  fb.className="info "+(isCorrect?"success-box":"warning-box");
+  fb.textContent=
+    (isCorrect?"✅ 정답입니다!":"⚠️ 더 안전한 대처가 있어요.")+
+    "\n\n"+c.reason+
+    "\n\n올바른 대응: "+c.choices[c.correct]+
+    ($("ownAnswer").value.trim()
+      ?"\n\n내가 작성한 답변: "+$("ownAnswer").value.trim()
+      :"");
+  fb.style.whiteSpace="pre-line";
+
+  renderCase();
+  renderDashboard();
+};
+
+$("nextCaseBtn").onclick=()=>{
+  if(!answered)return;
+
+  if(caseIndex===CASES.length-1){
+    caseIndex=0;
+    selectedChoice=null;
+    answered=false;
+    $("ownAnswer").value="";
+    showPage("atlas");
+    return;
+  }
+
+  caseIndex++;
+  selectedChoice=null;
+  answered=false;
+  $("ownAnswer").value="";
+  renderCase();
+  window.scrollTo(0,0);
+};
+
+/* 5. 도감 및 학습 보상 */
+
+function checkRewards(){
+  const n=state.discovered.length;
+
+  if(n>=3&&!state.rewards.includes("bronze")){
+    state.rewards.push("bronze");
+    toast("🥉 안전 금융 탐험가 배지를 획득했어요!");
+  }
+
+  if(n>=5&&!state.rewards.includes("gold")){
+    state.rewards.push("gold");
+    toast("🏆 금융 사기 지킴이 배지를 획득했어요!");
+  }
+}
+
+function renderAtlas(){
+  const box=$("atlasGrid");
+  box.replaceChildren();
+  const ids=Object.keys(TYPES);
+  const count=state.discovered.length;
+
+  $("atlasProgressText").textContent=
+    count+" / "+ids.length+"종 발견";
+  $("atlasPercent").textContent=
+    Math.round(count/ids.length*100)+"%";
+  $("atlasFill").style.width=
+    (count/ids.length*100)+"%";
+
+  ids.forEach(id=>{
+    const type=TYPES[id];
+    const unlocked=state.discovered.includes(id);
+    const btn=document.createElement("button");
+    btn.className="atlas-card"+(unlocked?"":" locked");
+    btn.disabled=!unlocked;
+
+    const icon=document.createElement("div");
+    icon.className="atlas-icon";
+    icon.textContent=unlocked?type.emoji:"🔒";
+
+    const title=document.createElement("strong");
+    title.textContent=unlocked?type.name:"미발견 유형";
+
+    const desc=document.createElement("small");
+    desc.textContent=unlocked
+      ?"내용 확인하기 →"
+      :"예방 연습을 완료하면 열려요.";
+
+    btn.append(icon,title,desc);
+    btn.onclick=()=>{
+      const detail=$("atlasDetail");
+      detail.classList.remove("hidden");
+      detail.textContent=
+        `${type.emoji} ${type.name}\n\n`+
+        `🔎 특징\n${type.feature}\n\n`+
+        `⚠️ 주요 수법\n${type.trick}\n\n`+
+        `🛡️ 예방법\n${type.prevent}`;
+      detail.style.whiteSpace="pre-line";
+    };
+
+    box.appendChild(btn);
+  });
+
+  const rewards=$("rewardBox");
+  rewards.replaceChildren();
+
+  const title=document.createElement("h3");
+  title.textContent=count>=5
+    ?"🏆 SAFE MONEY 금융 사기 지킴이!"
+    :count>=3
+      ?"🥉 안전 금융 탐험가!"
+      :"🌱 도감을 채워 배지를 얻어 보세요.";
+
+  const description=document.createElement("p");
+  description.textContent=
+    `현재 ${count}종 발견\n`+
+    `🥉 3종 발견: 탐험가 배지 ${count>=3?"획득 완료":"잠금"}\n`+
+    `🏆 5종 발견: 지킴이 배지 ${count>=5?"획득 완료":"잠금"}`;
+  description.style.whiteSpace="pre-line";
+  rewards.append(title,description);
+}
+
+/* 6. 대시보드 */
+
+function renderDashboard(){
+  $("statSolved").textContent=state.completed+"회";
+  $("statDiscovered").textContent=
+    state.discovered.length+" / 5";
+  $("statAccuracy").textContent=
+    (state.completed
+      ?Math.round(state.correct/state.completed*100)
+      :0)+"%";
+}
+
+renderExamples();
+renderCase();
+renderDashboard();
+renderAtlas();
+updateCharacterCount();
+</script>
+</body>
+</html>
